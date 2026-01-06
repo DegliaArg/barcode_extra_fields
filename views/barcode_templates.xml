@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+  <template
+    id="barcode_picking_line_extend"
+    inherit_id="stock_barcode.PickingLine"
+    inherit_mode="extension">
+
+    <xpath expr="//div[contains(@class, 'o_barcode_line_details')]" position="inside">
+
+      <!-- DEMANDA -->
+      <div class="o_barcode_extra_info">
+        <strong>Demanda:</strong>
+        <t t-esc="line.product_uom_qty"/>
+      </div>
+
+      <!-- POSICIONES (Studio) -->
+      <t t-if="line.x_studio_posiciones">
+        <div class="o_barcode_extra_info">
+          <strong>Posiciones:</strong>
+          <t t-esc="line.x_studio_posiciones"/>
+        </div>
+      </t>
+
+    </xpath>
+  </template>
+</odoo>
