@@ -1,14 +1,10 @@
 <odoo>
-  <template id="barcode_lines_custom_fields" inherit_id="stock_barcode.picking_line">
-    <xpath expr="//div[@class='o_barcode_line_info']" position="inside">
-      <t t-if="props.line.x_studio_posiciones">
-        <div class="o_barcode_custom_info">
-          <strong>Posiciones:</strong>
-          <t t-foreach="props.line.x_studio_posiciones" t-as="pos">
-            <span t-esc="pos.display_name" class="badge badge-info"/>
-          </t>
-        </div>
-      </t>
-    </xpath>
-  </template>
+    <template id="barcode_lines_custom_demanda" inherit_id="stock_barcode.picking_lines">
+        <xpath expr="//div[contains(@class, 'o_line_info')]" position="inside">
+            <div class="o_demanda_field">
+                <span>Demanda: </span>
+                <span t-esc="line.product_uom_qty"/>
+            </div>
+        </xpath>
+    </template>
 </odoo>
