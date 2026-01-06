@@ -5,7 +5,7 @@
         "stock",
         "stock_barcode",
     ],
-    "data": [
+    "qweb": [
         "views/barcode_templates.xml",
     ],
     "installable": True,
