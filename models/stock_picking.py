@@ -8,11 +8,16 @@ class StockPicking(models.Model):
 
         for picking in res.get("records", []):
             for line in picking.get("lines", []):
-                move_line_id = line.get("id")
-                if not move_line_id:
+                move_id = line.get("move_id")
+                if not move_id:
+                    line["x_studio_posiciones"] = ""
                     continue
 
-                move_line = self.env["stock.move.line"].browse(move_line_id)
-                line["x_studio_posiciones"] = move_line.x_studio_posiciones or ""
+                move = self.env["stock.move"].browse(move_id)
+
+                # many2many → string legible
+                line["x_studio_posiciones"] = ", ".join(
+                    move.x_studio_posiciones.mapped("display_name")
+                ) if move.x_studio_posiciones else ""
 
         return res
